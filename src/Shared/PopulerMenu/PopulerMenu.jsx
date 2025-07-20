@@ -22,10 +22,14 @@ const PopulerMenu = () => {
       ></SectionTitle>
 
       {/*  */}
-      <div>
-        {
-            menu.map(item => <MenuItem key={item._id} item={item} />)
-        }
+      <div className="grid md:grid-cols-2 gap-4 mb-10">
+        {menu.map((item) => (
+          <MenuItem key={item._id} item={item} />
+        ))}
+      </div>
+      {/* btn */}
+      <div className="flex justify-center mb-10">
+        <button className="btn border">View Full Menu</button>
       </div>
     </section>
   );
