@@ -3,7 +3,7 @@ import aboutBg from "../../assets/home/chef-service.jpg";
 const AboutBistro = () => {
   return (
     <div
-      className="bg-cover bg-center bg-no-repeat min-h-[400px] mb-20 flex items-center justify-center px-6 py-12"
+      className="bg-cover bg-center bg-fixed bg-no-repeat min-h-[400px] mb-20 flex items-center justify-center px-6 py-12"
       style={{ backgroundImage: `url(${aboutBg})` }}
     >
       <div className="bg-white p-8 rounded-lg max-w-3xl text-center">
