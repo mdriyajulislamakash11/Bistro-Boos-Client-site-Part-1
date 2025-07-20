@@ -3,6 +3,7 @@ import AboutBistro from "./AboutBistro";
 import Banner from "./Banner";
 import CallUs from "./CallUs/CallUs";
 import Category from "./Category";
+import ShuldTry from "./ShuldTry/ShuldTry";
 
 
 const Home = () => {
@@ -17,6 +18,8 @@ const Home = () => {
             <PopulerMenu />
 
             <CallUs />
+
+            <ShuldTry />
         </div>
     );
 };
