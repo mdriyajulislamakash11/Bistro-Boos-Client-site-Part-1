@@ -33,10 +33,13 @@ const Menu = () => {
             <MenuCategory items={offered} />
 
             {/* desserts menu items */}
-            <MenuCategory items={desserts} title="Dessert" coverImg={imgDessert} />
+            <MenuCategory items={desserts} title="DESSERT" coverImg={imgDessert} />
 
             {/* Pizza menu items */}
-            <MenuCategory items={pizza} title="Pizza" coverImg={imgPizza} />
+            <MenuCategory items={pizza} title="PIZZA" coverImg={imgPizza} />
+
+            {/* Pizza menu items */}
+            <MenuCategory items={salad} title="SALADS" coverImg={imgSalad} />
 
 
             
