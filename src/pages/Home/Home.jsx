@@ -1,3 +1,4 @@
+import AboutBistro from "./AboutBistro";
 import Banner from "./Banner";
 import Category from "./Category";
 
@@ -8,6 +9,8 @@ const Home = () => {
             <Banner />
 
             <Category />
+
+            <AboutBistro />
         </div>
     );
 };
