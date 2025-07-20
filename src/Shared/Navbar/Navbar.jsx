@@ -25,7 +25,7 @@ const Navbar = () => {
               : "hover:text-yellow-300"
           }
         >
-          Menu
+          Our Menu
         </NavLink>
       </li>
       <li>

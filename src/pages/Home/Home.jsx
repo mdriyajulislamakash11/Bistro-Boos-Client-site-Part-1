@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import PopulerMenu from "../../Shared/PopulerMenu/PopulerMenu";
 import AboutBistro from "./AboutBistro";
 import Banner from "./Banner";
@@ -7,27 +8,30 @@ import Featured from "./Featured/Featured";
 import ShuldTry from "./ShuldTry/ShuldTry";
 import Testimonials from "./Testimonials/Testimonials";
 
-
 const Home = () => {
-    return (
-        <div>
-            <Banner />
+  return (
+    <div>
+      <Helmet>
+        <title>Bistro Boos | Home</title>
+      </Helmet>
 
-            <Category />
+      <Banner />
 
-            <AboutBistro />
+      <Category />
 
-            <PopulerMenu />
+      <AboutBistro />
 
-            <CallUs />
+      <PopulerMenu />
 
-            <ShuldTry />
+      <CallUs />
 
-            <Featured />
+      <ShuldTry />
 
-            <Testimonials />
-        </div>
-    );
+      <Featured />
+
+      <Testimonials />
+    </div>
+  );
 };
 
 export default Home;
