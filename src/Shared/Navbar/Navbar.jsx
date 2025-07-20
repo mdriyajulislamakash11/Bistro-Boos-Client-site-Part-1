@@ -37,7 +37,7 @@ const Navbar = () => {
               : "hover:text-yellow-300"
           }
         >
-          Order
+          Order Food
         </NavLink>
       </li>
       <li>
