@@ -5,6 +5,7 @@ import CallUs from "./CallUs/CallUs";
 import Category from "./Category";
 import Featured from "./Featured/Featured";
 import ShuldTry from "./ShuldTry/ShuldTry";
+import Testimonials from "./Testimonials/Testimonials";
 
 
 const Home = () => {
@@ -23,6 +24,8 @@ const Home = () => {
             <ShuldTry />
 
             <Featured />
+
+            <Testimonials />
         </div>
     );
 };
