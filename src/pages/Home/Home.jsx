@@ -1,3 +1,4 @@
+import PopulerMenu from "../../Shared/PopulerMenu/PopulerMenu";
 import AboutBistro from "./AboutBistro";
 import Banner from "./Banner";
 import Category from "./Category";
@@ -11,6 +12,8 @@ const Home = () => {
             <Category />
 
             <AboutBistro />
+
+            <PopulerMenu />
         </div>
     );
 };
