@@ -12,7 +12,6 @@ import MenuCategory from './MenuCategory';
 
 const Menu = () => {
     const [menu] = useMenu();
-    const popular = menu.filter(item => item.category === 'popular');
     const desserts = menu.filter(item => item.category === 'dessert');
     const pizza = menu.filter(item => item.category === 'pizza');
     const salad = menu.filter(item => item.category === 'salad');
@@ -40,6 +39,9 @@ const Menu = () => {
 
             {/* Pizza menu items */}
             <MenuCategory items={salad} title="SALADS" coverImg={imgSalad} />
+
+            {/* Pizza menu items */}
+            <MenuCategory items={soup} title="SOUPS" coverImg={imgSoup} />
 
 
             
