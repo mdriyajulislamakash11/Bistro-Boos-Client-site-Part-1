@@ -94,8 +94,13 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <NavLink to="/" className="btn btn-ghost normal-case text-xl font-bold">
-          Bistro Boos
+        <NavLink to="/" className=" normal-case text-xl font-bold">
+          <div className="">
+            <h2>BISTRO BOOS</h2>{" "}
+            <h2>
+              <span className="text-sm">R E S T A U R A N T</span>{" "}
+            </h2>
+          </div>
         </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
