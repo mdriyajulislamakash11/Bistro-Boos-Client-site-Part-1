@@ -5,6 +5,7 @@ import orderCover from "../../assets/shop/banner2.jpg";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../../hook/useMenu";
+import OrderCard from "./OrderCard";
 
 const Order = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -38,8 +39,22 @@ const Order = () => {
               <Tab>Desserts</Tab>
               <Tab>Drinks</Tab>
             </TabList>
-            <TabPanel></TabPanel>
-            <TabPanel></TabPanel>
+            <TabPanel>
+              <OrderCard items={salad} />
+            </TabPanel>
+            <TabPanel>
+              <OrderCard items={pizza} />
+            </TabPanel>
+            <TabPanel>
+              <OrderCard items={soup} />
+            </TabPanel>
+            <TabPanel>
+              <OrderCard items={desserts} />
+            </TabPanel>
+            <TabPanel>
+              <OrderCard items={offered} />
+            </TabPanel>
+            
           </Tabs>
         </div>
       </div>
