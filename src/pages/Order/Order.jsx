@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import Cover from "../../Shared/cover/Cover";
-
 import orderCover from "../../assets/shop/banner2.jpg";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -8,13 +8,18 @@ import useMenu from "../../hook/useMenu";
 import OrderCard from "./OrderCard";
 
 const Order = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
+  const { category } = useParams();
+
+  const initialIndex = categories.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
+
   const [menu] = useMenu();
-  const desserts = menu.filter((item) => item.category === "dessert");
-  const pizza = menu.filter((item) => item.category === "pizza");
   const salad = menu.filter((item) => item.category === "salad");
+  const pizza = menu.filter((item) => item.category === "pizza");
   const soup = menu.filter((item) => item.category === "soup");
-  const offered = menu.filter((item) => item.category === "offered");
+  const desserts = menu.filter((item) => item.category === "dessert");
+  const drinks = menu.filter((item) => item.category === "drinks"); 
 
   return (
     <div>
@@ -22,16 +27,11 @@ const Order = () => {
         img={orderCover}
         title="Order Food"
         description="Authoritatively predominate client-centric products without adaptive ROI. Enthusiastically pursue user friendly alignments via excellent value. Quickly facilitate."
-      ></Cover>
-
-      {/* Tabs */}
+      />
 
       <div className="flex justify-center mt-16 mb-8">
         <div>
-          <Tabs
-            defaultIndex={tabIndex}
-            onSelect={(index) => setTabIndex(index)}
-          >
+          <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
             <TabList>
               <Tab>Salad</Tab>
               <Tab>Pizza</Tab>
@@ -39,6 +39,7 @@ const Order = () => {
               <Tab>Desserts</Tab>
               <Tab>Drinks</Tab>
             </TabList>
+
             <TabPanel>
               <OrderCard items={salad} />
             </TabPanel>
@@ -52,9 +53,8 @@ const Order = () => {
               <OrderCard items={desserts} />
             </TabPanel>
             <TabPanel>
-              <OrderCard items={offered} />
+              <OrderCard items={drinks} /> {/* ✅ fixed drinks */}
             </TabPanel>
-            
           </Tabs>
         </div>
       </div>
