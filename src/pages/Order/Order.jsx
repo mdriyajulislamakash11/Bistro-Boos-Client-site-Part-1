@@ -4,9 +4,16 @@ import Cover from "../../Shared/cover/Cover";
 import orderCover from "../../assets/shop/banner2.jpg";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import useMenu from "../../hook/useMenu";
 
 const Order = () => {
   const [tabIndex, setTabIndex] = useState(0);
+  const [menu] = useMenu();
+  const desserts = menu.filter((item) => item.category === "dessert");
+  const pizza = menu.filter((item) => item.category === "pizza");
+  const salad = menu.filter((item) => item.category === "salad");
+  const soup = menu.filter((item) => item.category === "soup");
+  const offered = menu.filter((item) => item.category === "offered");
 
   return (
     <div>
@@ -15,7 +22,6 @@ const Order = () => {
         title="Order Food"
         description="Authoritatively predominate client-centric products without adaptive ROI. Enthusiastically pursue user friendly alignments via excellent value. Quickly facilitate."
       ></Cover>
-
 
       {/* Tabs */}
 
