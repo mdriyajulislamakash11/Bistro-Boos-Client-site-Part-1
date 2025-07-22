@@ -6,6 +6,7 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../../hook/useMenu";
 import OrderCard from "./OrderCard";
+import { Helmet } from "react-helmet-async";
 
 const Order = () => {
   const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
@@ -19,10 +20,14 @@ const Order = () => {
   const pizza = menu.filter((item) => item.category === "pizza");
   const soup = menu.filter((item) => item.category === "soup");
   const desserts = menu.filter((item) => item.category === "dessert");
-  const drinks = menu.filter((item) => item.category === "drinks"); 
+  const drinks = menu.filter((item) => item.category === "drinks");
 
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boos | Order Food</title>
+      </Helmet>
+
       <Cover
         img={orderCover}
         title="Order Food"
@@ -31,7 +36,10 @@ const Order = () => {
 
       <div className="flex justify-center mt-16 mb-8">
         <div>
-          <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+          <Tabs
+            defaultIndex={tabIndex}
+            onSelect={(index) => setTabIndex(index)}
+          >
             <TabList>
               <Tab>Salad</Tab>
               <Tab>Pizza</Tab>
