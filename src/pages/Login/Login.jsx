@@ -1,10 +1,16 @@
-import React, { useEffect } from "react";
-import { LoadCanvasTemplate, loadCaptchaEnginge } from "react-simple-captcha";
-
+import React, { useEffect, useRef, useState } from "react";
+import {
+  LoadCanvasTemplate,
+  loadCaptchaEnginge,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 const Login = () => {
+  const captchaRef = useRef(null);
+  const [disabled, setDisabled] = useState(true);
+
   useEffect(() => {
-    loadCaptchaEnginge(6); 
+    loadCaptchaEnginge(6);
   }, []);
 
   const handleLogin = (e) => {
@@ -14,7 +20,16 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     const captchaValue = form.captcha.value;
+    console.log({ email, password, captchaValue });
+  };
 
+  const handleValidateCaptcha = () => {
+    const user_captcha_value = captchaRef.current.value;
+    if (validateCaptcha(user_captcha_value)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
   };
 
   return (
@@ -40,7 +55,7 @@ const Login = () => {
                   placeholder="email"
                   name="email"
                   className="input input-bordered"
-                  required
+                    required
                 />
               </div>
               <div className="form-control">
@@ -52,7 +67,7 @@ const Login = () => {
                   placeholder="password"
                   name="password"
                   className="input input-bordered"
-                  required
+                    required
                 />
               </div>
 
@@ -62,16 +77,25 @@ const Login = () => {
                   <LoadCanvasTemplate />
                 </label>
                 <input
+                  ref={captchaRef}
                   type="text"
                   placeholder="Enter captcha"
                   name="captcha"
                   className="input input-bordered"
                   required
                 />
+                <button
+                  onClick={handleValidateCaptcha}
+                  className="btn btn-outline btn-xs w-full hover:bg-black mt-2 hover:text-white"
+                >
+                  Validate
+                </button>
               </div>
 
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button disabled={disabled} className="btn w-full btn-primary">
+                  Login
+                </button>
               </div>
             </form>
           </div>
