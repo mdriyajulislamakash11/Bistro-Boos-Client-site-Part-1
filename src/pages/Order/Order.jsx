@@ -61,7 +61,7 @@ const Order = () => {
               <OrderCard items={desserts} />
             </TabPanel>
             <TabPanel>
-              <OrderCard items={drinks} /> {/* ✅ fixed drinks */}
+              <OrderCard items={drinks} /> 
             </TabPanel>
           </Tabs>
         </div>
