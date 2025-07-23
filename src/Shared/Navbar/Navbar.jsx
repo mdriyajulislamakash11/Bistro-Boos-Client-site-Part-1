@@ -42,26 +42,14 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/about"
+          to="/login"
           className={({ isActive }) =>
             isActive
               ? "text-yellow-400 font-bold underline"
               : "hover:text-yellow-300"
           }
         >
-          About
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/contact"
-          className={({ isActive }) =>
-            isActive
-              ? "text-yellow-400 font-bold underline"
-              : "hover:text-yellow-300"
-          }
-        >
-          Contact
+          Login
         </NavLink>
       </li>
     </>
