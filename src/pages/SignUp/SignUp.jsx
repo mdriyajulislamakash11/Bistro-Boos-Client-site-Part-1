@@ -22,7 +22,7 @@ const SignUp = () => {
               <input
                 type="text"
                 name="name"
-                placeholder="email"
+                placeholder="name"
                 className="input input-bordered"
                 required
               />
