@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContex } from "../../Firebase/AuthProvider";
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContex);
   const {
     register,
     handleSubmit,
@@ -12,12 +15,20 @@ const SignUp = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    createUser(data.email, data.password)
+    .then(result => {
+      const LoggedUser = result.user;
+      console.log(LoggedUser)
+    })
   };
 
   console.log(watch(register));
 
   return (
     <div className="hero bg-base-200 min-h-screen">
+      <Helmet>
+        <title>Bistro Boos || SignUp</title>
+      </Helmet>
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">SignUp now!</h1>
