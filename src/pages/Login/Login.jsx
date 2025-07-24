@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   LoadCanvasTemplate,
   loadCaptchaEnginge,
@@ -9,7 +9,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useContext(AuthContex);
   const navigate = useNavigate();
@@ -50,8 +49,8 @@ const Login = () => {
       });
   };
 
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCaptcha = (e) => {
+    const user_captcha_value = e.target.value;
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
     } else {
@@ -104,20 +103,14 @@ const Login = () => {
                   <LoadCanvasTemplate />
                 </label>
                 <input
-                  ref={captchaRef}
+                  onBlur={handleValidateCaptcha}
                   type="text"
                   placeholder="Enter captcha"
                   name="captcha"
                   className="input input-bordered"
                   required
                 />
-                <button
-                  type="button"
-                  onClick={handleValidateCaptcha}
-                  className="btn btn-outline btn-xs w-full hover:bg-black mt-2 hover:text-white"
-                >
-                  Validate
-                </button>
+               
               </div>
 
               <div className="form-control mt-6">
