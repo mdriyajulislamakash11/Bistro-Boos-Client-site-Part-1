@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContex } from "../../Firebase/AuthProvider";
+
 
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContex);
+
+  const handleLogout = () => {
+
+    logout()
+      .then((result) => {
+       console.log('logOut', result)
+      })
+  };
+
   const links = (
     <>
       <li>
@@ -40,18 +52,33 @@ const Navbar = () => {
           Order Food
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/login"
-          className={({ isActive }) =>
-            isActive
-              ? "text-yellow-400 font-bold underline"
-              : "hover:text-yellow-300"
-          }
-        >
-          Login
-        </NavLink>
-      </li>
+
+      {user ? (
+        <>
+          <button
+            onClick={handleLogout}
+            className='btn btn-ghost'
+          >
+            SignOut
+          </button>
+        </>
+      ) : (
+        <>
+          {" "}
+          <li>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-yellow-400 font-bold underline"
+                  : "hover:text-yellow-300"
+              }
+            >
+              SignIn
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
