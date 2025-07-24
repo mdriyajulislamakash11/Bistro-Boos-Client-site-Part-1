@@ -5,12 +5,14 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContex } from "../../Firebase/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useContext(AuthContex);
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -21,20 +23,33 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    const captchaValue = form.captcha.value;
-
 
     signIn(email, password)
-    .then(result => {
-      const user = result.user;
+      .then((result) => {
+        const user = result.user;
 
-    })
+        Swal.fire({
+          icon: "success",
+          title: "Login Successful!",
+          text: `Welcome back, ${user.email || "User"}!`,
+          timer: 2000,
+          showConfirmButton: false,
+        });
 
+        // Navigate after login (optional)
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error.message);
 
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: error.message || "Something went wrong!",
+        });
+      });
   };
 
-
-  // Eta captchar jonno evenHandler
   const handleValidateCaptcha = () => {
     const user_captcha_value = captchaRef.current.value;
     if (validateCaptcha(user_captcha_value)) {
@@ -97,6 +112,7 @@ const Login = () => {
                   required
                 />
                 <button
+                  type="button"
                   onClick={handleValidateCaptcha}
                   className="btn btn-outline btn-xs w-full hover:bg-black mt-2 hover:text-white"
                 >
@@ -110,7 +126,14 @@ const Login = () => {
                 </button>
               </div>
             </form>
-            <p className="text-center mb-2"><small>New here? <Link className="text-blue-600 font-bold " to='/signUp'>Create an account</Link> </small></p>
+            <p className="text-center mb-2">
+              <small>
+                New here?{" "}
+                <Link className="text-blue-600 font-bold " to="/signUp">
+                  Create an account
+                </Link>{" "}
+              </small>
+            </p>
           </div>
         </div>
       </div>

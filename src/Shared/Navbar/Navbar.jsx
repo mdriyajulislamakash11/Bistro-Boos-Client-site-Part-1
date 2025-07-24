@@ -1,18 +1,32 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContex } from "../../Firebase/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContex);
 
-  const handleLogout = () => {
-
-    logout()
-      .then((result) => {
-       console.log('logOut', result)
-      })
-  };
+const handleLogout = () => {
+  logout()
+    .then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Logged Out!',
+        text: 'You have successfully logged out.',
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+      });
+    });
+};
 
   const links = (
     <>
