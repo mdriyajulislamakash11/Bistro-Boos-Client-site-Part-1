@@ -5,13 +5,17 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContex } from "../../Firebase/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useContext(AuthContex);
   const navigate = useNavigate();
+  const location = useLocation();
+
+ const from = location.state?.from?.pathname || "/";
+
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -36,7 +40,7 @@ const Login = () => {
         });
 
         // Navigate after login (optional)
-        navigate("/");
+        navigate(from, {replace: true});
       })
       .catch((error) => {
         console.error(error.message);

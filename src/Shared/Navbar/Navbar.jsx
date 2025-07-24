@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContex } from "../../Firebase/AuthProvider";
 import Swal from "sweetalert2";
 
@@ -66,16 +66,32 @@ const handleLogout = () => {
           Order Food
         </NavLink>
       </li>
+         <li>
+        <NavLink
+          to="/secret"
+          className={({ isActive }) =>
+            isActive
+              ? "text-yellow-400 font-bold underline"
+              : "hover:text-yellow-300"
+          }
+        >
+          Secret
+        </NavLink>
+      </li>
 
       {user ? (
-        <>
-          <button
+        <li>
+          <Link
             onClick={handleLogout}
-            className='btn btn-ghost'
+            className={({ isActive }) =>
+            isActive
+              ? "text-yellow-400 font-bold underline"
+              : "hover:text-yellow-300"
+          }
           >
             SignOut
-          </button>
-        </>
+          </Link>
+        </li>
       ) : (
         <>
           {" "}
