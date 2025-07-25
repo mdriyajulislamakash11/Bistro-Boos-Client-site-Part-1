@@ -1,7 +1,13 @@
 import React from "react";
+import useAuth from "../../../hook/useAuth";
 
 const ShuoldTryCard = ({ item }) => {
   const { name, image, recipe, price } = item;
+  const {user} = useAuth()
+
+  const handleAddToCart = (food) => {
+    console.log(food)
+  }
 
   return (
     <div className="card bg-base-100  shadow-xl">
@@ -15,7 +21,9 @@ const ShuoldTryCard = ({ item }) => {
         <h2 className="card-title">{name}</h2>
         <p>{recipe}</p>
         <div className="card-actions">
-          <button className="btn text-yellow-600 border-b-2 border-b-yellow-500 hover:bg-black hover:text-white hover:scale-105 hover:shadow-lg transition-all duration-300">
+          <button 
+          onClick={() => handleAddToCart(item)}
+          className="btn text-yellow-600 border-b-2 border-b-yellow-500 hover:bg-black hover:text-white hover:scale-105 hover:shadow-lg transition-all duration-300">
             ADD TO CARD
           </button>
         </div>
