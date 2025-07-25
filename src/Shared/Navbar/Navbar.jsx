@@ -2,31 +2,31 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContex } from "../../Firebase/AuthProvider";
 import Swal from "sweetalert2";
-
+import { HiShoppingCart } from "react-icons/hi";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContex);
 
-const handleLogout = () => {
-  logout()
-    .then(() => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Logged Out!',
-        text: 'You have successfully logged out.',
-        timer: 2000,
-        showConfirmButton: false,
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Logged Out!",
+          text: "You have successfully logged out.",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       });
-    })
-    .catch((error) => {
-      console.error(error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-      });
-    });
-};
+  };
 
   const links = (
     <>
@@ -66,7 +66,7 @@ const handleLogout = () => {
           Order Food
         </NavLink>
       </li>
-         <li>
+      <li>
         <NavLink
           to="/secret"
           className={({ isActive }) =>
@@ -78,16 +78,35 @@ const handleLogout = () => {
           Secret
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "text-yellow-400 font-bold underline"
+              : "hover:text-yellow-300"
+          }
+        >
+          <div className="flex justify-center items-center">
+            <div className="relative mt-1">
+              <HiShoppingCart className="text-[18px]" />
+            </div>
+            <div className="absolute ml-6 -mt-6">
+              <button className="bg-purple-600 w-3 h-3 rounded-full">0+</button>
+            </div>
+          </div>
+        </NavLink>
+      </li>
 
       {user ? (
         <li>
           <Link
             onClick={handleLogout}
             className={({ isActive }) =>
-            isActive
-              ? "text-yellow-400 font-bold underline"
-              : "hover:text-yellow-300"
-          }
+              isActive
+                ? "text-yellow-400 font-bold underline"
+                : "hover:text-yellow-300"
+            }
           >
             SignOut
           </Link>
