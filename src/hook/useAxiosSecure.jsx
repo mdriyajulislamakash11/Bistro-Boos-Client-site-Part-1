@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 export const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000/carts'
+    baseURL: 'http://localhost:5000'
 })
 
 const useAxiosSecure = () => {
@@ -12,7 +12,7 @@ const useAxiosSecure = () => {
 
 
 
-    
+
     return axiosSecure;
 }
 
