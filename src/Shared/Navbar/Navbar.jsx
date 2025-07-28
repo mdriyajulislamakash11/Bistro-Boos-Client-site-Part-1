@@ -3,9 +3,11 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContex } from "../../Firebase/AuthProvider";
 import Swal from "sweetalert2";
 import { HiShoppingCart } from "react-icons/hi";
+import useCart from "../../hook/useCart";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContex);
+  const [cart] = useCart()
 
   const handleLogout = () => {
     logout()
@@ -92,7 +94,7 @@ const Navbar = () => {
               <HiShoppingCart className="text-[18px]" />
             </div>
             <div className="absolute ml-6 -mt-6">
-              <button className="bg-purple-600 w-3 h-3 rounded-full">0+</button>
+              <button className="bg-purple-600 w-3 h-3 rounded-full">+{cart.length}</button>
             </div>
           </div>
         </NavLink>
