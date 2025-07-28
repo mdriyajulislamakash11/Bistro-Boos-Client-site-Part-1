@@ -85,7 +85,7 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "text-yellow-400 font-bold underline"
+              ? " font-bold underline"
               : "hover:text-yellow-300"
           }
         >
