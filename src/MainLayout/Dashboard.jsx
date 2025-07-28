@@ -1,0 +1,93 @@
+import React from "react";
+import {
+  FaAd,
+  FaCalendar,
+  FaHome,
+  FaList,
+  FaShoppingCart,
+} from "react-icons/fa";
+import { NavLink, Outlet } from "react-router-dom";
+
+const Dashboard = () => {
+  return (
+    <div className="flex">
+      {/* dashboard menu */}
+      <div className="w-64 min-h-screen bg-orange-400">
+        <ul className="menu p-4 w-full space-y-2">
+          <li>
+            <NavLink
+              to="/dashboard/userHome"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-start bg-blue-600  text-white font-bold border-none"
+                  : " text-start btn-ghost"
+              }
+            >
+              <FaHome />
+              User Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/cart"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-start bg-blue-600 text-white font-bold border-none"
+                  : " text-start btn-ghost"
+              }
+            >
+              <FaShoppingCart className="mr-2" />
+              My Cart
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/reservation"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-start bg-blue-600 text-white font-bold border-none"
+                  : " text-start btn-ghost"
+              }
+            >
+              <FaCalendar />
+              My Reservation
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/review"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-start bg-blue-600 text-white font-bold border-none"
+                  : " text-start btn-ghost"
+              }
+            >
+              <FaAd />
+              Add Review
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/bookings"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-start bg-blue-600 text-white font-bold border-none"
+                  : " text-start btn-ghost"
+              }
+            >
+              <FaList />
+              My Bookings
+            </NavLink>
+          </li>
+        </ul>
+      </div>
+
+      {/* left side dashboard */}
+      <div className="flex-1">
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
