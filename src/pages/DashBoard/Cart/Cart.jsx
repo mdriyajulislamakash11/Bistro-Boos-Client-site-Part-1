@@ -1,6 +1,9 @@
+import useCart from "../../../hook/useCart";
 
 
 const Cart = () => {
+    const [cart] = useCart()
+    console.log(cart)
     return (
         <div>
             <h2 className="text-6xl">My Cart</h2>

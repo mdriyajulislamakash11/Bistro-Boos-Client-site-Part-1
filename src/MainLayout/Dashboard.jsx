@@ -4,6 +4,7 @@ import {
   FaCalendar,
   FaHome,
   FaList,
+  FaSearch,
   FaShoppingCart,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
@@ -77,6 +78,46 @@ const Dashboard = () => {
             >
               <FaList />
               My Bookings
+            </NavLink>
+          </li>
+          <div className="divider"></div>
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-start bg-blue-600  text-white font-bold border-none"
+                  : " text-start btn-ghost"
+              }
+            >
+              <FaHome />
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/menu"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-start bg-blue-600  text-white font-bold border-none"
+                  : " text-start btn-ghost"
+              }
+            >
+              <FaSearch />
+              Our Menu
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/order/salad"
+              className={({ isActive }) =>
+                isActive
+                  ? " text-start bg-blue-600  text-white font-bold border-none"
+                  : " text-start btn-ghost"
+              }
+            >
+              <FaHome />
+              Order Food
             </NavLink>
           </li>
         </ul>
