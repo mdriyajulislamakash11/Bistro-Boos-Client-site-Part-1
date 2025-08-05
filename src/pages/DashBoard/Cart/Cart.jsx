@@ -4,10 +4,10 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hook/useAxiosSecure";
 
 const Cart = () => {
-  const [cart] = useCart();
+  const [ cart ,refetch ] = useCart();
 
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -20,21 +20,23 @@ const Cart = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // Swal.fire({
-        //   title: "Deleted!",
-        //   text: "Your file has been deleted.",
-        //   icon: "success",
-        // });
-
-        // delete oparetions: 
-        
-
+        // delete oparetions:
+        axiosSecure.delete(`/carts/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
       }
     });
   };
 
   return (
-    <div>
+    <div className="p-14">
       <div className="flex justify-evenly items-center my-6">
         <h2 className="text-4xl font-semibold">Items: {cart.length}</h2>
         <h2 className="text-4xl font-semibold">Total Price: ${totalPrice}</h2>
