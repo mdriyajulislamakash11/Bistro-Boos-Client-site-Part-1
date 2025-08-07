@@ -2,10 +2,12 @@
 import {
   FaAd,
   FaCalendar,
+  FaEnvelope,
   FaHome,
   FaList,
   FaSearch,
   FaShoppingCart,
+  FaVoicemail,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hook/useCart";
@@ -82,6 +84,9 @@ const Dashboard = () => {
               My Bookings
             </NavLink>
           </li>
+
+          {/* _______________________________ user ________________________________________ */}
+
           <div className="divider"></div>
           <li>
             <NavLink
@@ -98,7 +103,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to="/menu"
+              to="/order/salad"
               className={({ isActive }) =>
                 isActive
                   ? " text-start bg-blue-600  text-white font-bold border-none"
@@ -111,14 +116,14 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to="/order/salad"
+              to="/order/contact"
               className={({ isActive }) =>
                 isActive
                   ? " text-start bg-blue-600  text-white font-bold border-none"
                   : " text-start btn-ghost"
               }
             >
-              <FaHome />
+              <FaEnvelope />
               Order Food
             </NavLink>
           </li>
