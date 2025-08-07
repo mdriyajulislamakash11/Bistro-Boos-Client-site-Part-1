@@ -7,6 +7,7 @@ import {
 import { AuthContex } from "../../Firebase/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import SocialLogin from "../../components/SocialLogin";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -14,8 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
- const from = location.state?.from?.pathname || "/";
-
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -40,7 +40,7 @@ const Login = () => {
         });
 
         // Navigate after login (optional)
-        navigate(from, {replace: true});
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error(error.message);
@@ -114,7 +114,6 @@ const Login = () => {
                   className="input input-bordered"
                   required
                 />
-               
               </div>
 
               <div className="form-control mt-6">
@@ -131,6 +130,8 @@ const Login = () => {
                 </Link>{" "}
               </small>
             </p>
+            <div className="divider">OR</div>
+            <SocialLogin  />
           </div>
         </div>
       </div>
