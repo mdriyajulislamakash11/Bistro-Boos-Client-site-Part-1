@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContex } from "../../Firebase/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hook/useAxiosPublic";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContex);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  const axiosPublic = useAxiosPublic();
 
   const {
     register,
@@ -25,23 +27,35 @@ const SignUp = () => {
 
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
-            Swal.fire({
-              icon: "success",
-              title: "Signup Successful!",
-              text: `Welcome, ${data.name}!`,
-              timer: 2000,
-              showConfirmButton: false,
-            });
+            // create user entry in the database
+            const userInfo = {
+              name: data.name,
+              email: data.email,
+            };
 
-            reset();
-            navigate(from, { replace: true });
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                console.log("user addede to the database")
+                reset();
+                Swal.fire({
+                  icon: "success",
+                  title: "Signup Successful!",
+                  text: `Welcome, ${data.name}!`,
+                  timer: 2000,
+                  showConfirmButton: false,
+                });
+                navigate(from, { replace: true });
+              }
+            });
           })
           .catch((error) => {
             console.error("Profile update error:", error);
             Swal.fire({
               icon: "error",
               title: "Profile Update Failed",
-              text: error.message || "Something went wrong while updating your profile.",
+              text:
+                error.message ||
+                "Something went wrong while updating your profile.",
             });
           });
       })
@@ -64,7 +78,8 @@ const SignUp = () => {
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Sign Up Now!</h1>
           <p className="py-6">
-            Create your account and explore exclusive features tailored just for you.
+            Create your account and explore exclusive features tailored just for
+            you.
           </p>
         </div>
         <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
@@ -80,7 +95,9 @@ const SignUp = () => {
                 placeholder="Your Name"
                 className="input input-bordered"
               />
-              {errors.name && <span className="text-red-600">Name is required</span>}
+              {errors.name && (
+                <span className="text-red-600">Name is required</span>
+              )}
             </div>
 
             {/* Photo URL */}
@@ -94,7 +111,9 @@ const SignUp = () => {
                 placeholder="Photo URL"
                 className="input input-bordered"
               />
-              {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}
+              {errors.photoURL && (
+                <span className="text-red-600">Photo URL is required</span>
+              )}
             </div>
 
             {/* Email */}
@@ -108,7 +127,9 @@ const SignUp = () => {
                 placeholder="Email"
                 className="input input-bordered"
               />
-              {errors.email && <span className="text-red-600">Email is required</span>}
+              {errors.email && (
+                <span className="text-red-600">Email is required</span>
+              )}
             </div>
 
             {/* Password */}
@@ -132,15 +153,19 @@ const SignUp = () => {
                 <p className="text-red-600">Password is required</p>
               )}
               {errors.password?.type === "minLength" && (
-                <p className="text-red-600">Password must be at least 6 characters</p>
+                <p className="text-red-600">
+                  Password must be at least 6 characters
+                </p>
               )}
               {errors.password?.type === "maxLength" && (
-                <p className="text-red-600">Password must be less than 20 characters</p>
+                <p className="text-red-600">
+                  Password must be less than 20 characters
+                </p>
               )}
               {errors.password?.type === "pattern" && (
                 <p className="text-red-600">
-                  Password must include at least one uppercase letter, one lowercase letter,
-                  one number, and one special character.
+                  Password must include at least one uppercase letter, one
+                  lowercase letter, one number, and one special character.
                 </p>
               )}
             </div>
