@@ -64,13 +64,13 @@ const AuthProvider = ({ children }) => {
         // TODO: remove token (if token stored in the client site: LocalStroge, chaching, in memory)
         localStorage.removeItem("access-token-remove", res.data.token);
       }
-      
+
       setLoading(false);
     });
     return () => {
       return unSubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
 
   const authInfo = {
     user,
