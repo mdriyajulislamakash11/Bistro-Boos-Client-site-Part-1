@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContex } from "../../Firebase/AuthProvider";
+import Loading from "../../Shared/loading/Loading";
 
 const PrivetRoute = ({ children }) => {
   const { user, loading } =  useContext(AuthContex)
@@ -8,7 +9,8 @@ const PrivetRoute = ({ children }) => {
 
 
   if (loading) {
-    return <p>loading....</p>;
+    return <Loading />;
+    // return <p>Loading...</p> ;
   }
 
   if (user) {
