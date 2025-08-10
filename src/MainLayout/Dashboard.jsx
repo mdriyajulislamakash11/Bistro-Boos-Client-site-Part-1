@@ -12,12 +12,13 @@ import {
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hook/useCart";
+import useAdmin from "../hook/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
 
   // TODO: get isAdmin value grom the database
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   return (
     <div className="flex">
@@ -99,7 +100,7 @@ const Dashboard = () => {
               <div className="divider"></div>
               <li>
                 <NavLink
-                  to="/"
+                  to="/dashboard/userHome"
                   className={({ isActive }) =>
                     isActive
                       ? " text-start bg-blue-600  text-white font-bold border-none"
@@ -107,33 +108,59 @@ const Dashboard = () => {
                   }
                 >
                   <FaHome />
-                  Home
+                  User Home
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/order/salad"
+                  to="/dashboard/reservation"
                   className={({ isActive }) =>
                     isActive
                       ? " text-start bg-blue-600  text-white font-bold border-none"
                       : " text-start btn-ghost"
                   }
                 >
-                  <FaSearch />
-                  Our Menu
+                  <FaCalendar />
+                  My Reservation
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/order/contact"
+                  to="/dashboard/cart"
                   className={({ isActive }) =>
                     isActive
                       ? " text-start bg-blue-600  text-white font-bold border-none"
                       : " text-start btn-ghost"
                   }
                 >
-                  <FaEnvelope />
-                  Order Food
+                  <FaShoppingCart />
+                  My Cart ({cart.length})
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/review"
+                  className={({ isActive }) =>
+                    isActive
+                      ? " text-start bg-blue-600  text-white font-bold border-none"
+                      : " text-start btn-ghost"
+                  }
+                >
+                  <FaAd />
+                  My Review
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/dashboard/bookings"
+                  className={({ isActive }) =>
+                    isActive
+                      ? " text-start bg-blue-600  text-white font-bold border-none"
+                      : " text-start btn-ghost"
+                  }
+                >
+                  <FaList />
+                  My Bookings
                 </NavLink>
               </li>
             </>
