@@ -9,8 +9,8 @@ const PrivetRoute = ({ children }) => {
 
 
   if (loading) {
-    return <Loading />;
-    // return <p>Loading...</p> ;
+    // return <Loading />;
+    return <p>Loading...</p> ;
   }
 
   if (user) {
