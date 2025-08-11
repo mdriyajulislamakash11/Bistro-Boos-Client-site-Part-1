@@ -13,6 +13,7 @@ import AllUsers from "../pages/DashBoard/All Users/AllUsers";
 import AddItems from "../pages/DashBoard/Add Items/AddItems";
 import AdminRoute from "./AdminRoute";
 import ManageItems from "../pages/DashBoard/ManageItems/ManageItems";
+import UpdateItem from "../pages/DashBoard/UpdateItem/UpdateItem";
 
 const router = createBrowserRouter([
   {
@@ -91,6 +92,15 @@ const router = createBrowserRouter([
             <ManageItems />
           </AdminRoute>
         ),
+      },
+      {
+        path: "updateItem/:id",
+        element: (
+          <AdminRoute>
+            <UpdateItem />
+          </AdminRoute>
+        ),
+        loader: ({params}) => fetch(`http://localhost:5000/menu/${params.id}`)
       },
     ],
   },

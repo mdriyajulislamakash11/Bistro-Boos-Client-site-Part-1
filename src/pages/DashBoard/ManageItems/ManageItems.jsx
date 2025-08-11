@@ -4,6 +4,7 @@ import useMenu from "../../../hook/useMenu";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hook/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
   const [menu, , refetch] = useMenu();
@@ -13,33 +14,32 @@ const ManageItems = () => {
     console.log(id);
   };
 
-   const handleDelete = (item) => {
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // delete oparetions:
-          axiosSecure.delete(`/menu/${item._id}`).then((res) => {
-            console.log(res.data)
-            if (res.data.deletedCount > 0) {
-              refetch()
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success",
-              });
-            }
-          });
-        }
-      });
-    };
-
+  const handleDelete = (item) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // delete oparetions:
+        axiosSecure.delete(`/menu/${item._id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
 
   return (
     <div>
@@ -76,12 +76,11 @@ const ManageItems = () => {
                   <td>{item.price}</td>
 
                   <td>
-                    <button
-                      onClick={() => handleUpdateItem(item._id)}
-                      className="p-4 bg-yellow-500 text-white"
-                    >
-                      <FaEdit />
-                    </button>
+                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                      <button className="p-4 bg-yellow-500 text-white">
+                        <FaEdit />
+                      </button>
+                    </Link>
                   </td>
                   <td>
                     <button
