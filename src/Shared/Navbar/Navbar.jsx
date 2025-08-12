@@ -4,10 +4,12 @@ import { AuthContex } from "../../Firebase/AuthProvider";
 import Swal from "sweetalert2";
 import { HiShoppingCart } from "react-icons/hi";
 import useCart from "../../hook/useCart";
+import useAdmin from "../../hook/useAdmin";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContex);
-  const [cart] = useCart()
+  const [cart] = useCart();
+  const [isAdmin] = useAdmin();
 
   const handleLogout = () => {
     logout()
@@ -68,25 +70,40 @@ const Navbar = () => {
           Order Food
         </NavLink>
       </li>
-      <li>
+      {
+        user && isAdmin && <li>
         <NavLink
-          to="/secret"
+          to="/dashboard/adminHome"
           className={({ isActive }) =>
             isActive
               ? "text-yellow-400 font-bold underline"
               : "hover:text-yellow-300"
           }
         >
-          Secret
+          Dashboard
         </NavLink>
       </li>
+      }
+      {
+        user && !isAdmin && <li>
+        <NavLink
+          to="/dashboard/userHome"
+          className={({ isActive }) =>
+            isActive
+              ? "text-yellow-400 font-bold underline"
+              : "hover:text-yellow-300"
+          }
+        >
+          Dashboard
+        </NavLink>
+      </li>
+      }
+      
       <li>
         <NavLink
           to="/dashboard"
           className={({ isActive }) =>
-            isActive
-              ? " font-bold underline"
-              : "hover:text-yellow-300"
+            isActive ? " font-bold underline" : "hover:text-yellow-300"
           }
         >
           <div className="flex justify-center items-center">
@@ -94,7 +111,9 @@ const Navbar = () => {
               <HiShoppingCart className="text-[18px]" />
             </div>
             <div className="absolute ml-6 -mt-6">
-              <button className="bg-purple-600 w-3 h-3 rounded-full">+{cart.length}</button>
+              <button className="bg-purple-600 w-3 h-3 rounded-full">
+                +{cart.length}
+              </button>
             </div>
           </div>
         </NavLink>
