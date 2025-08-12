@@ -152,7 +152,7 @@ const Dashboard = () => {
               </li>
               <li>
                 <NavLink
-                  to="/dashboard/bookings"
+                  to="/dashboard/paymentHistory"
                   className={({ isActive }) =>
                     isActive
                       ? " text-start bg-blue-600  text-white font-bold border-none"
@@ -160,7 +160,7 @@ const Dashboard = () => {
                   }
                 >
                   <FaList />
-                  My Bookings
+                  Payment History
                 </NavLink>
               </li>
             </>
