@@ -6,7 +6,7 @@ const ShuldTry = () => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/menu')
+        fetch('https://final-project-server1.vercel.app/menu')
             .then(res => res.json())
             .then(data => {
                 const filterByData = data.filter((item) => item.category === 'popular')
