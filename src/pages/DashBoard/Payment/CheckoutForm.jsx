@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hook/useAxiosSecure";
 import useCart from "../../../hook/useCart";
 import useAuth from "../../../hook/useAuth";
+import Swal from "sweetalert2";
 
 const CheckoutForm = () => {
   const [error, setError] = useState("");
@@ -12,16 +13,18 @@ const CheckoutForm = () => {
   const Elements = useElements();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const [cart] = useCart();
+  const [cart, refetch] = useCart();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
   useEffect(() => {
-    axiosSecure
-      .post("/create-payment-intent", { price: totalPrice })
-      .then((res) => {
-        console.log(res.data.clientSecret);
-        setClientSecret(res.data.clientSecret);
-      });
+    if (totalPrice > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { price: totalPrice })
+        .then((res) => {
+          console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+        });
+    }
   }, [axiosSecure, totalPrice]);
 
   const handleSubmit = async (event) => {
@@ -77,13 +80,23 @@ const CheckoutForm = () => {
           price: totalPrice,
           date: new Date(), // utc data convert, use moment js to
           cartId: cart.map((item) => item._id),
-          menuItemId: cart.map(item => item.menuItemId),
-          status: 'pending'
+          menuItemId: cart.map((item) => item.menuItemId),
+          status: "pending",
         };
 
-        const res = await axiosSecure.post('/payments', payment);
-        console.log( 'payments saved', res.data)
+        const res = await axiosSecure.post("/payments", payment);
+        console.log("payments saved", res.data);
+        refetch();
 
+        if (res?.data?.paymentResult?.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Thank you for the payment",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
       }
     }
   };

@@ -61,8 +61,8 @@ const AuthProvider = ({ children }) => {
           }
         });
       } else {
-        // remove token (if token stored in the client site: LocalStroge, chaching, in memory)
-        localStorage.removeItem("access-token-remove", res.data.token);
+        // remove token if no user
+        localStorage.removeItem("access-token");
       }
 
       setLoading(false);
