@@ -1,12 +1,51 @@
-# React + Vite
+# Bistro-Boos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack restaurant web application featuring user authentication, payment processing, admin dashboard, and real-time order management.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Links
 
-## Expanding the ESLint configuration
+- **Client (Frontend):** [https://bistro-boos-d2400.web.app/](https://bistro-boos-d2400.web.app/)  
+- **Server (Backend):** [https://final-project-server1.vercel.app](https://final-project-server1.vercel.app)  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Project Overview
+
+Bistro-Boos is a modern restaurant management system designed to streamline menu browsing, ordering, and payment processes. It offers secure user authentication, payment integration with Stripe, and an admin dashboard to manage menu items, users, and orders effectively. The app is fully responsive and built with a focus on security and usability.
+
+---
+
+## Technology Stack
+
+- **Frontend:** React, React Router, React Query, Tailwind CSS, Firebase Authentication, Stripe API  
+- **Backend:** Node.js, Express.js, MongoDB, JWT, Stripe API  
+- **Deployment:** Firebase Hosting (client), Vercel (server)  
+
+---
+
+## Features
+
+- User registration and login (Email/Password, Google Sign-In)  
+- Role-based access control (Admin and User)  
+- Secure payment processing with Stripe integration  
+- Admin dashboard for managing users, menu items, and orders  
+- Real-time order statistics and revenue reports  
+- Responsive UI design for desktop and mobile devices  
+
+---
+
+## Installation & Setup
+
+### Prerequisites
+
+- Node.js installed  
+- MongoDB Atlas or local MongoDB  
+- Firebase project with Authentication enabled  
+- Stripe account for payment integration  
+
+### Clone and Install
+
+```bash
+git clone <your-repository-url>
